@@ -15,7 +15,9 @@ export default function Navbar() {
             </li>
           </ul>
           <div>
-            <button>سبد خرید</button>
+            <Link to="/cart">
+              <button>سبد خرید</button>
+            </Link>
           </div>
         </div>
       </Container>
