@@ -1,6 +1,6 @@
-import { Products } from "../types/server";
+import { IProduct } from "../types/server";
 
-type TProductItem = Products;
+type TProductItem = IProduct;
 
 export default function ProductItem({
   title,

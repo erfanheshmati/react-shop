@@ -5,6 +5,11 @@ const client = axios.create({
 });
 
 export async function getProducts() {
-  const { data } = await client("/products"); // result = data.data
-  return data;
+  const res = await client("/products");
+  return res;
+}
+
+export async function getProduct(id: string | number) {
+  const res = await client(`/products/${id}`);
+  return res;
 }

@@ -3,13 +3,13 @@ import Container from "../../components/Container";
 import ProductItem from "../../components/ProductItem";
 import { useEffect, useState } from "react";
 import { getProducts } from "../../services/api";
-import { Products } from "../../types/server";
+import { IProduct } from "../../types/server";
 
 export default function Store() {
-  const [products, setProducts] = useState<Products[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
-    getProducts().then((res) => setProducts(res));
+    getProducts().then((res) => setProducts(res.data));
   }, []);
 
   return (
