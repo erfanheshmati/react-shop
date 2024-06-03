@@ -4,11 +4,14 @@ import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { getProduct } from "../../services/api";
 import { IProduct } from "../../types/server";
+import { useCartContext } from "../../context/CartContext";
 
 export default function Product() {
   const params = useParams<{ id: string }>();
 
   const [product, setProduct] = useState<IProduct>();
+
+  const { cartItems } = useCartContext();
 
   useEffect(() => {
     getProduct(params.id as string).then((res) => setProduct(res.data));

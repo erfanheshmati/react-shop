@@ -1,8 +1,12 @@
 import Button from "../../components/Button";
 import CartItem from "../../components/CartItem";
 import Container from "../../components/Container";
+import { useCartContext } from "../../context/CartContext";
 
 export default function Cart() {
+  // const { cartItems } = useContext(CartContext);
+  const { cartItems } = useCartContext();
+
   return (
     <div className="mt-10">
       <Container>
