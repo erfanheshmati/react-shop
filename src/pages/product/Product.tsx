@@ -11,7 +11,12 @@ export default function Product() {
 
   const [product, setProduct] = useState<IProduct>();
 
-  const { cartItems } = useCartContext();
+  const {
+    handleIncreaseProductQty,
+    handleDecreaseProductQty,
+    getProductQty,
+    handleRemoveProduct,
+  } = useCartContext();
 
   useEffect(() => {
     getProduct(params.id as string).then((res) => setProduct(res.data));
@@ -20,19 +25,60 @@ export default function Product() {
   return (
     <div className="mt-20">
       <Container>
-        <div className="mt-10 grid grid-cols-12">
-          <div className="bg-gray-100/70 col-span-9 text-right p-4 space-y-4">
+        <div className="flex flex-col-reverse lg:grid grid-cols-12">
+          {/* Content */}
+          <div className="col-span-9 bg-gray-100/70 rounded text-right p-4 space-y-4">
             <h1 className="font-bold">{product?.title}</h1>
             <p>قیمت: {product?.price}</p>
             <p>{product?.description}</p>
-            <div>
-              <Button variant="primary" className="hover:opacity-80">
-                افزودن به سبد خرید
-              </Button>
+            <div className="flex flex-row-reverse items-center gap-2">
+              {getProductQty(parseInt(params.id as string)) === 0 ? (
+                <Button
+                  variant="primary"
+                  className="hover:opacity-80"
+                  onClick={() =>
+                    handleIncreaseProductQty(parseInt(params.id as string))
+                  }
+                >
+                  افزودن به سبد خرید
+                </Button>
+              ) : (
+                <div className="flex flex-row-reverse items-center gap-2">
+                  <Button
+                    variant="primary"
+                    className="hover:opacity-80"
+                    onClick={() =>
+                      handleIncreaseProductQty(parseInt(params.id as string))
+                    }
+                  >
+                    +
+                  </Button>
+                  <span>{getProductQty(parseInt(params.id as string))}</span>
+                  <Button
+                    variant="primary"
+                    className="hover:opacity-80"
+                    onClick={() =>
+                      handleDecreaseProductQty(parseInt(params.id as string))
+                    }
+                  >
+                    -
+                  </Button>
+                  <Button
+                    variant="danger"
+                    className="hover:opacity-80"
+                    onClick={() =>
+                      handleRemoveProduct(parseInt(params.id as string))
+                    }
+                  >
+                    حذف کردن از سبد خرید
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
-          <div className="col-span-3">
-            <img src={product?.image} alt="" className="h-80 p-4 mx-auto" />
+          {/* Image */}
+          <div className="col-span-3 flex items-center justify-center">
+            <img src={product?.image} alt="" className="w-60 p-4" />
           </div>
         </div>
       </Container>
