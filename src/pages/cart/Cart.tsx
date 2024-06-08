@@ -8,14 +8,13 @@ export default function Cart() {
   const { cartItems } = useCartContext();
 
   return (
-    <div className="mt-10">
+    <div className="mt-20">
       <Container>
         <div className="space-y-5">
-          <div className="space-y-2">
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
+          <div className="space-y-4">
+            {cartItems.map((item) => (
+              <CartItem key={item.id} {...item} />
+            ))}
           </div>
           <div className="text-right font-bold text-[20px]">
             <p>قیمت کل: 200 هزار تومان</p>
@@ -23,7 +22,9 @@ export default function Cart() {
             <p>قیمت نهایی: 200 هزار تومان</p>
           </div>
           <div className="text-right">
-            <Button variant="success">ثبت سفارش</Button>
+            <Button variant="success" className="hover:opacity-80">
+              ثبت سفارش
+            </Button>
           </div>
         </div>
       </Container>
