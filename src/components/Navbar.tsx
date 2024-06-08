@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import Container from "./Container";
 import { useCartContext } from "../context/CartContext";
+import Button from "./Button";
 
 export default function Navbar() {
-  const { cartQty } = useCartContext();
+  const { cartQty, handleLogout } = useCartContext();
 
   return (
     <div className="h-16 border-b shadow-md flex items-center">
@@ -17,7 +18,14 @@ export default function Navbar() {
               <Link to="/store">فروشگاه</Link>
             </li>
           </ul>
-          <div>
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={handleLogout}
+              variant="secondary"
+              className="hover:opacity-80"
+            >
+              خروج از حساب کاربری
+            </Button>
             <Link to="/cart">
               <div className="flex flex-row-reverse items-center justify-center gap-1">
                 <button>سبد خرید</button>
